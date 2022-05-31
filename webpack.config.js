@@ -18,17 +18,12 @@ module.exports = {
         }),
     ],
     module: {
-        extensions: ['js'],
         rules: [
             {
                 test: /\.(css)$/,
                 use: ['style-loader', 'css-loader'],
             },
         ],
-        loaders: [
-            {exclude: ['node_modules'], loader: 'babel', test: /\.js?$/},
-            {loader: 'style-loader!css-loader', test: /\.css$/},,
-          ],
     },
     resolve: {
         alias: {

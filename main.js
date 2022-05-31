@@ -1,3 +1,8 @@
+import { createButtons,changeSign, equal, rootOfTwo, rootOfThree, plus, minus, multiply, devide, percent, createNumberButtons, createSimpleButtons } from "./utils"
+createButtons();
+createNumberButtons();
+createSimpleButtons();
+
 let inputValue = document.querySelector('.input');
 const numberButtons = Array.from(document.querySelectorAll('.number'));
 const buttonClear = document.querySelector('.clear');
@@ -25,7 +30,9 @@ import { CustomMath } from "./math";
 import "./styles.css"
 
 let isOperation;
+
 const customMath = new CustomMath();
+
 numberButtons.map(item => {
     item.addEventListener("click", (e) => {
         isOperation =  false;
@@ -41,32 +48,19 @@ buttonClear.addEventListener("click",() => {
 });
 
 buttonRootOfTwo.addEventListener("click", () => {
-    if (isOperation === false) {
-    if(Number(inputValue.value) < 0) {
-        inputValue.value = "Error";
-    }
-    else inputValue.value = customMath.sqrt(inputValue.value)
+    if (!isOperation) {
+    rootOfTwo();
 };
 });
 
 buttonRootOfThree.addEventListener("click", () => {
-    if (isOperation === false) {
-    let result;
-    if (Number(inputValue.value) < 0){
-        result = 0 - customMath.rootOfThree(inputValue.value.slice(1));
-    } else {
-        result = customMath.rootOfThree(inputValue.value);
-    }; 
-    if((Number(result).toFixed() ** 3) === Number(inputValue.value)) {
-        inputValue.value = result.toFixed();
-    } else {
-        inputValue.value = result;
-    };
+    if (!isOperation) {
+    rootOfThree();
 };
 });
 
 buttonRootOfY.addEventListener("click", () => {
-    if (isOperation === false) {
+    if (!isOperation) {
     const root = (e) => {
         if (e.target.value % 2 === 1 ){
             let result;
@@ -90,37 +84,31 @@ buttonRootOfY.addEventListener("click", () => {
 });
 
 buttonChange.addEventListener("click", () => {
-    if (isOperation === false) {
-    if (inputValue.value === "0") {
-        inputValue.value = "0";
+    if (!isOperation) {
+    changeSign(Number(inputValue.value));
     };
-    if (Number(inputValue.value) > 0) {
-        inputValue.value = String(customMath.change(Number(inputValue.value)));
-    } 
-    else inputValue.value = String(customMath.change(Number(inputValue.value)));
-};
 });
 
 buttonPowerOfTwo.addEventListener("click", () => {
-    if (isOperation === false) {
+    if (!isOperation) {
         inputValue.value = customMath.powerOfTwo(inputValue.value);
     };  
 });
 
 buttonPowerOfThree.addEventListener("click", () => {
-    if (isOperation === false) {
+    if (!isOperation) {
         inputValue.value = customMath.powerOfThree(inputValue.value);
     };
 });
 
 buttonTenInPower.addEventListener("click", () => {
-    if (isOperation === false) {
+    if (!isOperation) {
         inputValue.value = customMath.tenInPower(inputValue.value);
     };
 });
 
 buttonPowerOfY.addEventListener("click", () => {
-    if (isOperation === false) {
+    if (!isOperation) {
     const power = (e) => {
         inputValue.value = inputValue.value.slice(0,inputValue.value.length-1) ** (e.target.value);
         numberButtons.forEach(item => item.removeEventListener("click", power));
@@ -130,141 +118,60 @@ buttonPowerOfY.addEventListener("click", () => {
 });
 
 buttonofFactorial.addEventListener("click", () => {
-    if (isOperation === false) {
-    inputValue.value = customMath.factorial(inputValue.value);
+    if (!isOperation) {
+        inputValue.value = customMath.factorial(inputValue.value);
     };
 });
 
-const sumOfOperations = (value) => {
-    let sumOfSigns = value.split("").reduce((acc, item) => {
-        if (item === "+" || item === "-" || item === ":" || item === "*" || item === "%"){
-            return acc += 1;
-        };
-        return acc;
-    },0);
-    if (sumOfSigns > 1) {
-        let signs = value.split("").map(item => {
-            if (item !== ".") {
-                if(isNaN(Number(item))){
-                    return item;
-                };
-            };
-        }).filter(item => item !== undefined);
-        let array = value.split(signs[0])
-        .map(item =>{
-            item = String(parseFloat(item));
-            if(!isNaN(+item)){
-                return item;
-            };
-        }).filter(item => typeof item === 'string');
-        switch(signs[0]){
-            case "+":
-                inputValue.value = Number(array[0]) + Number(array[1]) + signs[1];
-                break;
-            case "-":
-                inputValue.value = Number(array[0]) - Number(array[1]) + signs[1];
-                break; 
-            case "*":
-                inputValue.value = (Number(array[0]) * Number(array[1])) + signs[1];
-                break;
-            case ":":
-                if (Number(array[1]) === 0){
-                    inputValue.value = "Error"
-                } else {
-                    inputValue.value = (Number(array[0]) / Number(array[1])) + signs[1];
-                }
-                break;
-            case "%" :
-                inputValue.value = array[0]/100 + signs[1];  
-                break;   
-        };
-    };
-};
 
 buttonPlus.addEventListener("click",() => {
-    if (isOperation === false) {
-        inputValue.value = inputValue.value + "+";
-        sumOfOperations(inputValue.value);
+    if (!isOperation) {
+        plus();
         isOperation = true;
-    }
+    };
 });
 
 buttonMinus.addEventListener("click", () => {
-    if (isOperation === false) {
-        inputValue.value = inputValue.value + "-";
-        sumOfOperations(inputValue.value);
+    if (!isOperation) {
+        minus();
         isOperation = true;
     }
 });
 
 buttonMultiply.addEventListener("click", () => {
-    if (isOperation === false) {
-        inputValue.value = inputValue.value + "*";
-        sumOfOperations(inputValue.value);
+    if (!isOperation) {
+        multiply();
         isOperation = true;
     }
 });
 
 buttonDevide.addEventListener("click", () => {
-    if (isOperation === false) {
-        inputValue.value = inputValue.value + ":";
-        sumOfOperations(inputValue.value);
+    if (!isOperation) {
+        devide();
         isOperation = true;
     }
 });
 
 buttonPercent.addEventListener("click", () => {
-    if (isOperation === false) {
-        inputValue.value = inputValue.value + "%";
-        sumOfOperations(inputValue.value);
+    if (!isOperation) {
+        percent();
     }
 });
 
-buttonEqual.addEventListener("click", () => {
-    let arrayOfElements = inputValue.value.split('')
-    let operation = arrayOfElements.reduce((acc,item) => {
-        if (item !== ".") {
-            if(isNaN(Number(item))){
-                acc = item
-                return acc;
-            };
-        };
-        return acc;
-    }, "");
-    let array = inputValue.value.split(operation).map(item => +item);
-        switch(operation){
-            case "+":
-                inputValue.value = array.reduce((acc,item) => acc + item, 0);
-                break;
-            case "-":
-                inputValue.value = array[0] - array[1];
-                break; 
-            case "*":
-                inputValue.value = array.reduce((acc,item) => acc * item, 1);
-                break;
-            case ":":
-                if (array[1] === 0) {
-                    inputValue.value = 'Error'
-                } else {
-                    inputValue.value = array[0]/array[1];
-                }
-                break;
-            case "%" :
-                inputValue.value = array[0]/100;  
-                break;  
-            default :
-                inputValue.value = "0";    
-        };
-});
+buttonEqual.addEventListener("click", equal);
 
 saveToStorage.addEventListener("click", () => {
-    if (isOperation === false) {
+    if (!isOperation) {
         localStorage.setItem("storageValue", inputValue.value);
     };
 });
 
 readFromStorage.addEventListener("click", () => {
-    inputValue.value = inputValue.value + localStorage.getItem("storageValue");
+    if (!isOperation) {
+        inputValue.value = localStorage.getItem("storageValue");
+    } else {
+        inputValue.value = inputValue.value + localStorage.getItem("storageValue");
+    };
 });
 
 cleanStorage.addEventListener("click", () => {
@@ -272,14 +179,13 @@ cleanStorage.addEventListener("click", () => {
 });
 
 storagePlusNumber.addEventListener("click", () => {
-    if (isOperation === false) {
+    if (!isOperation) {
         inputValue.value = Number(localStorage.getItem("storageValue")) + Number(inputValue.value);
     };
 });
 
 storageMinusNumber.addEventListener("click", () => {
-    if (isOperation === false) {
+    if (!isOperation) {
         inputValue.value = Number(localStorage.getItem("storageValue")) - Number(inputValue.value);
     };
 });
-
