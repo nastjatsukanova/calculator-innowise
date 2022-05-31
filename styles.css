@@ -1,0 +1,102 @@
+*{
+    cursor: pointer;
+}
+
+.calculator_block {
+    margin: 0 auto;
+    width: 50%;
+    border: none;
+    color: white;
+    background-color: #48494a;
+}
+.calculator_input {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.calculator_block {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    border: none;
+    width: 99%;
+    background-color: #48494a;
+    color: white;
+    font-size: 40px;
+    text-align: right;
+}
+
+.buttons_simple {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons_numbers {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 29%;
+    justify-content: space-between;
+}
+
+.simple {
+    font-size: 30px;
+    background-color: #fe9e09;
+    color: white;
+    border: 1px solid #48494a;
+    width: 50px;
+    height: 45px;
+}
+
+.number{
+    background-color: #757677;
+    color:white;
+    font-size: 30px;
+    border: 1px solid #48494a;
+    width: 33%;
+    height: 45px;
+}
+
+.zero, .equal {
+    width: 50%;
+}
+
+.functional{
+    font-size: 25px;
+    background-color: #5a5b5c;
+    color: white;
+    border: 1px solid #48494a;
+    width: 25%;
+    height: 45px;
+}
+
+.calculator_buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.buttons_functional {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 42%;
+    justify-content: flex-end;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.simple:hover{
+    background-color: #d18006;
+}
+
+.number:hover{
+    background-color: #5b5b5c;
+}
+
+.functional:hover{
+    background-color: #484848;
+}
